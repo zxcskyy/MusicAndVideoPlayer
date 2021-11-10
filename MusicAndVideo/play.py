@@ -55,7 +55,7 @@ async def ytdl(link):
         "-g",
         "-f",
         # CHANGE THIS BASED ON WHAT YOU WANT
-        "bestaudio",
+        "bestaudio/best",
         f"{link}",
         stdout=asyncio.subprocess.PIPE,
         stderr=asyncio.subprocess.PIPE,
@@ -110,7 +110,7 @@ async def play(client, m: Message):
     if replied:
         if replied.audio or replied.voice:
             await m.delete()
-            huehue = await replied.reply("**🔄 Memproses**")
+            huehue = await replied.reply("**PROCESING**")
             dl = await replied.download()
             link = replied.link
             if replied.audio:
@@ -129,8 +129,7 @@ async def play(client, m: Message):
                     caption=f"""
 **#⃣ Lagu Di Antrian Ke {pos}
 🏷️ Judul: [{songname}]({link})
-💬 Chat ID: {chat_id}
-🎧 Atas Permintaan: {m.from_user.mention}**
+🎧 Request by: {m.from_user.mention}**
 """,
                 )
             else:
@@ -147,7 +146,7 @@ async def play(client, m: Message):
                 await m.reply_photo(
                     photo="https://telegra.ph/file/6213d2673486beca02967.png",
                     caption=f"""
-**▶ Mulai Memutar Lagu
+**▶ Start Playing song
 🏷️ Judul: [{songname}]({link})
 💬 Chat ID: {chat_id}
 🎧 Atas Permintaan: {m.from_user.mention}**
@@ -180,7 +179,6 @@ async def play(client, m: Message):
                             caption=f"""
 **#⃣ Lagu Di Antrian Ke {pos}
 🏷️ Judul: [{songname}]({url})
-💬 Chat ID: {chat_id}
 🎧 Atas Permintaan: {m.from_user.mention}**
 """,
                         )
@@ -199,9 +197,8 @@ async def play(client, m: Message):
                             await m.reply_photo(
                                 photo=f"{IMAGE_THUMBNAIL}",
                                 caption=f"""
-**▶ Mulai Memutar Lagu
+**▶ Start Playing Song
 🏷️ Judul: [{songname}]({url})
-💬 Chat ID: {chat_id}
 🎧 Atas Permintaan: {m.from_user.mention}**
 """,
                             )
